@@ -60,3 +60,50 @@ cmd.execute("SELECT * FROM `udn_keyword` WHERE `keyword` = %s",(UserKey))
 conn.commit()
 x=cmd.fetchall()
 print(X)
+
+
+
+
+
+
+
+
+
+
+
+from bs4 import BeautifulSoup
+import requests
+import codecs
+import pymysql
+import jieba
+import jieba.analyse
+import prettytable
+
+conn=pymysql.connect(
+    host="localhost", #從其他地方存取要找到IP位置
+    user="root",      #選擇資料庫>按上方的伺服器>選擇使用者帳號
+    passwd="",        #密碼,顯示否則為空
+    db="2019-08-27",    #資料庫名稱
+    charset="utf8"    #編碼類型
+)
+cmd=conn.cursor()
+
+
+UserKey = input("請輸入你要找的關鍵字:")
+
+cmd.execute("SELECT `news_id` FROM `udn_keyword` WHERE `keyword` = %s",(UserKey))
+conn.commit()
+x=cmd.fetchall()
+
+#SELECT `title` FROM `udn_news` WHERE `content` LIKE '%區長%' 
+
+# Listx = []
+# for i in x:
+#     Listx.append(i)
+# # print(len(List))
+# for i in str(len(Listx)):
+#     cmd.execute("SELECT `url` , `title` FROM `udn_news` WHERE `id` = %s", (Listx(i)))
+#     x = cmd.fetchall()
+#     print(x)
+    
+conn.close()
