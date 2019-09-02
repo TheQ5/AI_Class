@@ -51,7 +51,24 @@ for a3 in a2:
                 "INSERT INTO `udn_keyword`(`news_id`,`keyword`) VALUES(%s,%s)"
             ,(new_id,kk))
             conn.commit()
-conn.close()
+times = 0
+
+while times < 10
+    p = requests.get(
+        "https://udn.com/news/get_breaks_article/" + str(times+2) + "/1/",
+    )
+
+    p.encoding = "utf8"
+
+    x = BeautifulSoup(p.text,"html.parser")
+    a1 = x.find_all("dt",{
+        "class" : "lazyload"
+    })
+    for i in a1:
+        a2=i.find("a").attrs["href"]
+        print(a2)
+            
+    times += 1
 
 UserKey = input("請輸入你要找的關鍵字:")
 
